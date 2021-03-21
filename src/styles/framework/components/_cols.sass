@@ -1,0 +1,26 @@
+.grid-container
+    @for $i from 1 through 12
+            &.cols-#{$i}
+                +grid-cols($i)
+
+    &.cols
+        @each $device, $width in $dw
+            &-#{$device}
+                +screen($width)
+                    @for $i from 1 through 12
+                        &-#{$i}
+                            +grid-cols($i)
+
+
+
+@for $i from 1 through 12
+    .col-#{$i}
+        width: #{100%/12*$i}
+
+.col
+    @each $device, $width in $dw
+        &-#{$device}
+            +screen($width)
+                @for $i from 1 through 12
+                    &-#{$i}
+                        width: #{100%/12*$i}

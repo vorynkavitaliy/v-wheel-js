@@ -1,0 +1,54 @@
+.flex-container
+    display: flex
+
+    &.wrap
+        flex-wrap: wrap
+
+
+.grid-container
+    display: grid
+
+$direction: (column, row)
+
+.flex-container, .grid-container
+    @each $dir in $direction
+        &.#{$dir}
+            @if $dir == 'column'
+                flex-direction: column
+            @else 
+                flex-direction: row
+            @each $device, $width in $dw
+                &-#{$device}
+                    @if $dir == 'column'
+                        +f-column($width)
+                    @else 
+                        +f-row($width)
+                        
+.grid-container               
+    @for $i from 0 through 10
+        &.offset
+            &-#{$i}
+                grid-gap: #{$i/2}rem
+
+
+.align
+    &-center
+        align-items: center
+        @each $device, $width in $dw
+            &-#{$device}
+                +screen($width)
+                    align-items: center
+
+.space
+    &-between
+        justify-content: space-between
+        @each $device, $width in $dw
+            &-#{$device}
+                +screen($width)
+                    justify-content: space-between
+    &-center
+        justify-content: center
+        @each $device, $width in $dw
+            &-#{$device}
+                +screen($width)
+                    justify-content: center

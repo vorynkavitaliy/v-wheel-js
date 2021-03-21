@@ -1,0 +1,89 @@
+=screen($dw)
+    @media screen and ( min-width: $dw )
+        @content
+
+=screenMax($dw)
+    @media screen and ( max-width: $dw )
+        @content
+
+=method($type, $sxd: 100%, $xd: 100%, $sd: 100%, $msd: 100%, $md: 100%, $lmd: 100%, $ld: 100%, $xld: 100%)
+    #{$type}: $sxd
+
+    @if $xd != 100%
+        +screen($dw-xd)
+            #{$type}: $xd
+
+    @if $sd != 100%
+        +screen($dw-sd)
+            #{$type}: $sd
+
+    @if $msd != 100%
+        +screen($dw-msd)
+            #{$type}: $msd
+
+    @if $md != 100%
+        +screen($dw-md)
+            #{$type}: $md
+
+    @if $lmd != 100%
+        +screen($dw-lmd)
+            #{$type}: $lmd
+
+    @if $ld != 100%
+        +screen($dw-ld)
+            #{$type}: $ld
+
+    @if $xld != 100%
+        +screen($dw-xld)
+            #{$type}: $xld
+
+=animation($name)
+    @keyframes #{$name}
+        @content
+
+@function rem($size, $dw: false)
+
+    @if $dw == $dw-xd
+        @return $size / 12px * 1rem
+
+    @if $dw == $dw-sd
+        @return $size / 12px * 1rem
+
+    @if $dw == $dw-msd
+        @return $size / 12px * 1rem
+
+    @if $dw == $dw-md
+        @return $size / 14px * 1rem
+
+    @if $dw == $dw-lmd
+        @return $size / 16px * 1rem
+
+    @if $dw == $dw-ld
+        @return $size / 18px * 1rem
+
+    @if $dw == $dw-xld
+        @return $size / 20px * 1rem
+
+    @else
+        @return $size / 10px * 1rem
+
+@function em($size)
+    @return $size / 18px * 1em
+
+@function vw($size, $dw)
+    @return $size / $dw * 100vw
+
+=grid-cols($i)
+    grid-template-columns: repeat(#{$i},1fr)
+
+=device-col($dw, $col-dw, $offset)
+    +screen($dw)
+        width: #{$col-dw}
+
+=f-row($dw)
+    +screen($dw)
+        flex-direction: row
+
+=f-column($dw)
+    +screen($dw)
+        flex-direction: column

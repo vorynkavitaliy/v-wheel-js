@@ -1,0 +1,95 @@
+$margin: (m: margin, mt: margin-top, mb: margin-bottom, mr: margin-right, ml: margin-left)
+$mhv: (mh, mv)
+$padding: (p: padding, pt: padding-top, pb: padding-bottom, pr: padding-right, pl: padding-left)
+$phv: (ph, pv)
+
+@each $class, $type in $margin
+    .#{$class}
+        @for $i from 0 through 10
+            &-#{$i}
+                #{$type}: #{($i*5)/10}rem
+
+        @each $device, $width in $dw
+            @for $i from 0 through 10
+                &-#{$device}-#{$i}
+                    +screen($width)
+                        #{$type}: #{($i*5)/10}rem
+
+@each $class, $type in $padding
+    .#{$class}
+        @for $i from 0 through 10
+            &-#{$i}
+                #{$type}: #{($i*5)/10}rem
+
+        @each $device, $width in $dw
+            @for $i from 0 through 10
+                &-#{$device}-#{$i}
+                    +screen($width)
+                        #{$type}: #{($i*5)/10}rem
+
+@each $class, $type in $margin
+    .#{$class}
+        &-a
+            #{$type}: auto
+
+        @each $device, $width in $dw
+            &-#{$device}-a
+                +screen($width)
+                    #{$type}: auto
+
+@each $class, $type in $mhv
+    .#{$class}
+        &-a
+            margin-left: auto
+            margin-right: auto
+
+        @each $device, $width in $dw
+            &-#{$device}-a
+                +screen($width)
+                    margin-left: auto
+                    margin-right: auto
+
+@each $class, $type in $mhv
+    .#{$class}
+        @for $i from 0 through 10
+            &-#{$i}
+                @if $class == 'mh'
+                    margin-left: #{($i*5)/10}rem
+                    margin-right: #{($i*5)/10}rem
+                @else 
+                    margin-top: #{($i*5)/10}rem
+                    margin-bottom: #{($i*5)/10}rem
+
+        @each $device, $width in $dw
+            @for $i from 0 through 10
+                &-#{$device}-#{$i}
+                    +screen($width)
+                        @if $class == 'mh'
+                            margin-left: #{($i*5)/10}rem
+                            margin-right: #{($i*5)/10}rem
+                        @else 
+                            margin-top: #{($i*5)/10}rem
+                            margin-bottom: #{($i*5)/10}rem
+
+@each $class, $type in $phv
+    .#{$class}
+        @for $i from 0 through 10
+            &-#{$i}
+                @if $class == 'ph'
+                    padding-right: #{($i*5)/10}rem
+                    padding-left: #{($i*5)/10}rem
+                @else 
+                    padding-top: #{($i*5)/10}rem
+                    padding-bottom: #{($i*5)/10}rem
+
+        @each $device, $width in $dw
+            @for $i from 0 through 10
+                &-#{$device}-#{$i}
+                    +screen($width)
+                        @if $class == 'ph'
+                            padding-right: #{($i*5)/10}rem
+                            padding-left: #{($i*5)/10}rem
+                        @else 
+                            padding-top: #{($i*5)/10}rem
+                            padding-bottom: #{($i*5)/10}rem
+                    
